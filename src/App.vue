@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import NavBar from './components/NavBar.vue';
+import LoadingBar from './components/LoadingBar.vue';
 </script>
 
 <template>
-  <RouterView />
+  <LoadingBar></LoadingBar>
+  <header>
+    <NavBar></NavBar>
+  </header>
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
 <style scoped></style>
