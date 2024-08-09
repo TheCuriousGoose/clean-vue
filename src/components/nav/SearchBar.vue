@@ -7,9 +7,10 @@ const recipeClient = new RecipeClient();
 
 const searchQuery = ref<string>('');
 const searchResults = ref<Recipe[]>([]);
+const showResults = ref<boolean>(false);
 
 function searchRecipes() {
-    console.log(`Searching for recipes with query: ${searchQuery.value}`);
+
 }
 
 const debouncedSearch = debounce((query: string) => {
@@ -20,9 +21,9 @@ const debouncedSearch = debounce((query: string) => {
 
 watch(searchQuery, (newVal) => {
     debouncedSearch(newVal);
+    showResults.value = newVal.length > 0;
 });
 
-// Return 5 recipes from searchResults
 const searchResultsLimited = computed(() => searchResults.value.slice(0, 5));
 </script>
 
@@ -33,9 +34,9 @@ const searchResultsLimited = computed(() => searchResults.value.slice(0, 5));
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
             <input class="form-control" type="search" placeholder="Search recipes" aria-label="Search"
-                v-model="searchQuery">
+                v-model="searchQuery" @focusin="showResults = true" @focusout="showResults = false">
         </form>
-        <div v-if="searchQuery" class="search-results">
+        <div v-if="showResults && searchQuery" class="search-results">
             <span class="text-muted px-3">Results for "{{ searchQuery }}":</span>
             <div class="d-flex flex-column">
                 <p class="text-center" v-if="searchResults.length < 1">No recepts found</p>
@@ -43,7 +44,6 @@ const searchResultsLimited = computed(() => searchResults.value.slice(0, 5));
                     <p class="fw-bold mb-0">{{ recipe.name }}</p>
                     <small class="text-muted">{{ recipe.description }}</small>
                 </div>
-
             </div>
         </div>
     </div>
