@@ -31,7 +31,7 @@ const selectRecipe = (recipe: Recipe) => {
 
 <template>
     <div class="search-bar position-relative">
-        <form class="input-group" @submit.prevent="searchRecipes">
+        <form class="input-group">
             <span class="input-group-text">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
