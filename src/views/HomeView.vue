@@ -3,6 +3,6 @@
 
 <template>
   <main>
-    <h1>Welcome to clean-vue</h1>
+    heloo
   </main>
 </template>

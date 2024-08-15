@@ -2,20 +2,13 @@
 import { useLocalStorage } from '@/utils/useLocalStorage';
 import { onMounted, ref, watch } from 'vue';
 import SearchBar from './SearchBar.vue';
+import AuthenicationButtons from './AuthenicationButtons.vue';
 
 const isDarkMode = useLocalStorage<boolean>('darkmode', false);
 const searchQuery = ref('');
 
 const toggleDarkMode = () => {
     isDarkMode.value = !isDarkMode.value;
-};
-
-const login = () => {
-    console.log('Login clicked');
-};
-
-const register = () => {
-    console.log('Register clicked');
 };
 
 const setPageMode = () => {
@@ -43,22 +36,10 @@ onMounted(() => {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 me-2 mb-lg-0">
-                    <li class="nav-item">
-                        <RouterLink to="/" class="nav-link active" aria-current="page">Home</RouterLink>
-                    </li>
-                    <li class="nav-item">
-                        <RouterLink to="/new" class="nav-link">New</RouterLink>
-                    </li>
-                    <li class="nav-item">
-                        <RouterLink to="/hot" class="nav-link">Hot</RouterLink>
-                    </li>
-                </ul>
                 <div class="me-auto w-25">
                     <SearchBar />
                 </div>
-                <button class="nav-link" @click="login">Login</button>
-                <button class="nav-link ms-2" @click="register">Register</button>
+                <AuthenicationButtons />
                 <span :class="{
                     'fa-regular fa-lightbulb fa-lg': isDarkMode,
                     'fa-solid fa-lightbulb fa-lg': !isDarkMode
